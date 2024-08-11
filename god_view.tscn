@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bu10gigsq520r"]
+
+[node name="GodView" type="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.34202, 0.939693, 0, -0.939693, 0.34202, 0, 25, 20)
+fov = 90.9

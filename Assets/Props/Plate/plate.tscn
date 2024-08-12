@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bieq4delacbdg"]
 
-[ext_resource type="PackedScene" uid="uid://b22tfxvmi7iwo" path="res://Assets/Plate/Plate.glb" id="1_xh7qv"]
+[ext_resource type="PackedScene" uid="uid://b22tfxvmi7iwo" path="res://Assets/Props/Plate/Plate.glb" id="1_xh7qv"]
 [ext_resource type="Shader" path="res://Shaders/BoTWShader.gdshader" id="2_xwbae"]
-[ext_resource type="Texture2D" uid="uid://sda2d588qgpd" path="res://Assets/Plate/Plate_PlateTexture.png" id="3_ujncu"]
+[ext_resource type="Texture2D" uid="uid://sda2d588qgpd" path="res://Assets/Props/Plate/Plate_PlateTexture.png" id="3_ujncu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yf0ts"]
 render_priority = 0

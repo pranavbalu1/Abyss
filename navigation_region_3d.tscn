@@ -11,6 +11,7 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Arr
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fv1pi"]
 albedo_texture = ExtResource("1_giwi6")
+uv1_scale = Vector3(7, 7, 7)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_af5kh"]
 albedo_texture = ExtResource("1_giwi6")

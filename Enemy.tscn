@@ -1,10 +1,35 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnb2o7fpmja8i"]
+[gd_scene load_steps=11 format=3 uid="uid://bnb2o7fpmja8i"]
 
 [ext_resource type="Script" path="res://Enemy.gd" id="1_provp"]
+[ext_resource type="ArrayMesh" uid="uid://cl0m2xyf4nacw" path="res://Assets/Characters/Ghost/GhostTrash.obj" id="2_dhh4p"]
+[ext_resource type="Shader" path="res://Shaders/BoTWShader.gdshader" id="3_ahj3y"]
 [ext_resource type="Script" path="res://States/State Machine.gd" id="3_dch8x"]
 [ext_resource type="Script" path="res://States/Idle.gd" id="4_0vrs3"]
+[ext_resource type="Texture2D" uid="uid://d2andjtfjn54e" path="res://Assets/Characters/Ghost/GhostBlanket.png" id="4_txb7g"]
 [ext_resource type="Script" path="res://States/Follow.gd" id="5_fh8hi"]
-[ext_resource type="PackedScene" uid="uid://by8anv2g6c2vb" path="res://Assets/Maps/Ghost_Prototype.glb" id="6_17w8c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dt5hi"]
+render_priority = 0
+shader = ExtResource("3_ahj3y")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/shadow_size = 0.045
+shader_parameter/shadow_blend = 0.001
+shader_parameter/shadow_extra_intensity = 0.0
+shader_parameter/shadow_color = null
+shader_parameter/light_tint = Color(1, 1, 1, 1)
+shader_parameter/rimlight_size = 0.649
+shader_parameter/rimlight_blend = 0.01
+shader_parameter/rimlight_color = Color(0.873092, 0.0876761, 0.196889, 1)
+shader_parameter/use_normalmap = false
+shader_parameter/animated = true
+shader_parameter/time_scale = 0.02
+shader_parameter/normal_bias = Vector3(0, 0, 0)
+shader_parameter/light_bias = Vector3(0, 0, 0)
+shader_parameter/use_view = true
+shader_parameter/view_bias = Color(1, 0, 1, 1)
+shader_parameter/view_multiplier = -1.0
+shader_parameter/albedo_texture = ExtResource("4_txb7g")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d6l6x"]
 
@@ -16,11 +41,10 @@ radius = 5.0
 script = ExtResource("1_provp")
 metadata/_edit_group_ = true
 
-[node name="Ghost_Prototype2" parent="." instance=ExtResource("6_17w8c")]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.225796, 0)
+mesh = ExtResource("2_dhh4p")
+surface_material_override/0 = SubResource("ShaderMaterial_dt5hi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

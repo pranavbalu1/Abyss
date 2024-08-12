@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dmohkq64l5lcb"]
 
-[ext_resource type="PackedScene" uid="uid://wvwd70o4gdh3" path="res://Assets/Chair_Wooden/ChairWooden.glb" id="1_r0tex"]
-[ext_resource type="Texture2D" uid="uid://cc8p30bpgpdxv" path="res://Assets/Chair_Wooden/ChairWooden_ChairTexture.png" id="2_o2hl7"]
+[ext_resource type="PackedScene" uid="uid://wvwd70o4gdh3" path="res://Assets/Props/Chair_Wooden/ChairWooden.glb" id="1_r0tex"]
+[ext_resource type="Texture2D" uid="uid://cc8p30bpgpdxv" path="res://Assets/Props/Chair_Wooden/ChairWooden_ChairTexture.png" id="2_o2hl7"]
 [ext_resource type="Shader" path="res://Shaders/BoTWShader.gdshader" id="2_vbrsr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_or62m"]

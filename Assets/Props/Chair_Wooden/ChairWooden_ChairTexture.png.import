@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djmbyo2v1f35n"
-path.s3tc="res://.godot/imported/Ghost_Prototype_GhostBlanket.png-518d2c007806eb35ab387cdbe0e77548.s3tc.ctex"
+uid="uid://cc8p30bpgpdxv"
+path.s3tc="res://.godot/imported/ChairWooden_ChairTexture.png-409e1dd4e6e7ebbf483f1f0f559bbf74.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "810f72bdfb6b3342ae7c9580868f9b3b"
+"md5": "6b9efe7898ac525a2425c61bb6b8fd06"
 }
 
 [deps]
 
-source_file="res://Assets/Maps/Ghost_Prototype_GhostBlanket.png"
-dest_files=["res://.godot/imported/Ghost_Prototype_GhostBlanket.png-518d2c007806eb35ab387cdbe0e77548.s3tc.ctex"]
+source_file="res://Assets/Props/Chair_Wooden/ChairWooden_ChairTexture.png"
+dest_files=["res://.godot/imported/ChairWooden_ChairTexture.png-409e1dd4e6e7ebbf483f1f0f559bbf74.s3tc.ctex"]
 
 [params]
 

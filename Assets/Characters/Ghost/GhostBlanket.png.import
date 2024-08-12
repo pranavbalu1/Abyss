@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sda2d588qgpd"
-path.s3tc="res://.godot/imported/Plate_PlateTexture.png-aa3dc13d8d0b8267168d18bbbdb467bc.s3tc.ctex"
+uid="uid://d2andjtfjn54e"
+path.s3tc="res://.godot/imported/GhostBlanket.png-76447d5d9d0a133aa79dd30be2b94a61.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "882b2b25d42e5f10d131ff4aa3244961"
-}
 
 [deps]
 
-source_file="res://Assets/Plate/Plate_PlateTexture.png"
-dest_files=["res://.godot/imported/Plate_PlateTexture.png-aa3dc13d8d0b8267168d18bbbdb467bc.s3tc.ctex"]
+source_file="res://Assets/Characters/Ghost/GhostBlanket.png"
+dest_files=["res://.godot/imported/GhostBlanket.png-76447d5d9d0a133aa79dd30be2b94a61.s3tc.ctex"]
 
 [params]
 

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://by8anv2g6c2vb"
-path="res://.godot/imported/Ghost_Prototype.glb-086116e3575f922dc145ee381878a9ac.scn"
+uid="uid://b22tfxvmi7iwo"
+path="res://.godot/imported/Plate.glb-b20ef433c10df03c71228b29bfe33772.scn"
 
 [deps]
 
-source_file="res://Assets/Maps/Ghost_Prototype.glb"
-dest_files=["res://.godot/imported/Ghost_Prototype.glb-086116e3575f922dc145ee381878a9ac.scn"]
+source_file="res://Assets/Props/Plate/Plate.glb"
+dest_files=["res://.godot/imported/Plate.glb-b20ef433c10df03c71228b29bfe33772.scn"]
 
 [params]
 

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b22tfxvmi7iwo"
-path="res://.godot/imported/Plate.glb-0f2ec4e82108b01f8f4a19d156ca3f89.scn"
+uid="uid://wvwd70o4gdh3"
+path="res://.godot/imported/ChairWooden.glb-07cfee8401ab285d23bf197f0e4d8d9d.scn"
 
 [deps]
 
-source_file="res://Assets/Plate/Plate.glb"
-dest_files=["res://.godot/imported/Plate.glb-0f2ec4e82108b01f8f4a19d156ca3f89.scn"]
+source_file="res://Assets/Props/Chair_Wooden/ChairWooden.glb"
+dest_files=["res://.godot/imported/ChairWooden.glb-07cfee8401ab285d23bf197f0e4d8d9d.scn"]
 
 [params]
 

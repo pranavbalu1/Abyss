@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cc8p30bpgpdxv"
-path.s3tc="res://.godot/imported/ChairWooden_ChairTexture.png-37fe4d57022fe7ed84d91d3fb93efd65.s3tc.ctex"
+uid="uid://sda2d588qgpd"
+path.s3tc="res://.godot/imported/Plate_PlateTexture.png-6942abd7f4ef8505e66328f83630f114.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "6b9efe7898ac525a2425c61bb6b8fd06"
+"md5": "882b2b25d42e5f10d131ff4aa3244961"
 }
 
 [deps]
 
-source_file="res://Assets/Chair_Wooden/ChairWooden_ChairTexture.png"
-dest_files=["res://.godot/imported/ChairWooden_ChairTexture.png-37fe4d57022fe7ed84d91d3fb93efd65.s3tc.ctex"]
+source_file="res://Assets/Props/Plate/Plate_PlateTexture.png"
+dest_files=["res://.godot/imported/Plate_PlateTexture.png-6942abd7f4ef8505e66328f83630f114.s3tc.ctex"]
 
 [params]
 

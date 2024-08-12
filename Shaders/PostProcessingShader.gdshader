@@ -41,7 +41,7 @@ void fragment() {
 	float depth = get_depth(SCREEN_UV, INV_PROJECTION_MATRIX);
 	
 	// GET SURROUNDING TEXEL
-	vec2 texel_size = 1.5 / VIEWPORT_SIZE.xy;
+	vec2 texel_size = 1.0 / VIEWPORT_SIZE.xy;
 	vec2 uvs[4]; // arrray containing the uvs of the surrounding pixel
 	uvs[0] = vec2(SCREEN_UV.x, SCREEN_UV.y + texel_size.y );
 	uvs[1] = vec2(SCREEN_UV.x, SCREEN_UV.y - texel_size.y );

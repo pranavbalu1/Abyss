@@ -53,9 +53,9 @@ shadow_enabled = true
 environment = SubResource("Environment_as4bf")
 
 [node name="Player" parent="." instance=ExtResource("4_w8ppx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, -14)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1, -14)
 
 [node name="Enemy" parent="." instance=ExtResource("5_bhxfs")]
-transform = Transform3D(0.0594283, 0, 0.998233, 0, 1, 0, -0.998233, 0, 0.0594283, -8.1535, 2.38419e-07, -15.1535)
+transform = Transform3D(0.0594283, 0, 0.998233, 0, 1, 0, -0.998233, 0, 0.0594283, -18.1535, 2.38419e-07, -15.1535)
 
 [node name="GodView" parent="." instance=ExtResource("4_8c6ik")]

@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnb2o7fpmja8i"]
+[gd_scene load_steps=10 format=3 uid="uid://bnb2o7fpmja8i"]
 
 [ext_resource type="Script" path="res://Enemy.gd" id="1_provp"]
 [ext_resource type="PackedScene" uid="uid://b88susdgymbjn" path="res://cone.tscn" id="2_yvwvl"]
+[ext_resource type="Script" path="res://States/State Machine.gd" id="3_dch8x"]
+[ext_resource type="Script" path="res://States/Idle.gd" id="4_0vrs3"]
+[ext_resource type="Script" path="res://States/Follow.gd" id="5_fh8hi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xyn1q"]
 albedo_color = Color(1, 0.337255, 0.32549, 1)
@@ -58,6 +61,18 @@ collide_with_areas = true
 debug_shape_custom_color = Color(1, 0.556863, 0, 1)
 debug_shape_thickness = 5
 metadata/_edit_group_ = true
+
+[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_dch8x")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("4_0vrs3")
+enemy = NodePath("../..")
+
+[node name="Follow" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_fh8hi")
+enemy = NodePath("../..")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

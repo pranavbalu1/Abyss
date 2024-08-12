@@ -1,16 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnb2o7fpmja8i"]
+[gd_scene load_steps=8 format=3 uid="uid://bnb2o7fpmja8i"]
 
 [ext_resource type="Script" path="res://Enemy.gd" id="1_provp"]
-[ext_resource type="PackedScene" uid="uid://b88susdgymbjn" path="res://cone.tscn" id="2_yvwvl"]
 [ext_resource type="Script" path="res://States/State Machine.gd" id="3_dch8x"]
 [ext_resource type="Script" path="res://States/Idle.gd" id="4_0vrs3"]
 [ext_resource type="Script" path="res://States/Follow.gd" id="5_fh8hi"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xyn1q"]
-albedo_color = Color(1, 0.337255, 0.32549, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_qbfe5"]
-material = SubResource("StandardMaterial3D_xyn1q")
+[ext_resource type="PackedScene" uid="uid://by8anv2g6c2vb" path="res://Assets/Maps/Ghost_Prototype.glb" id="6_17w8c"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d6l6x"]
 
@@ -22,9 +16,11 @@ radius = 5.0
 script = ExtResource("1_provp")
 metadata/_edit_group_ = true
 
+[node name="Ghost_Prototype2" parent="." instance=ExtResource("6_17w8c")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_qbfe5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -47,15 +43,11 @@ debug_path_custom_point_size = 5.0
 [node name="DetectionArea" type="Area3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.5, 0)
 
-[node name="Cone" parent="DetectionArea" instance=ExtResource("2_yvwvl")]
-transform = Transform3D(-8.74228e-09, -0.2, 8.74228e-09, 0.2, -8.74228e-09, -8.74228e-09, 8.74228e-09, 8.74228e-09, 0.2, 0.608, 0, 0)
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
 shape = SubResource("CylinderShape3D_721fn")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-visibility_parent = NodePath("../DetectionArea/Cone")
 target_position = Vector3(0, 0, 20)
 collide_with_areas = true
 debug_shape_custom_color = Color(1, 0.556863, 0, 1)

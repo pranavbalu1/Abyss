@@ -35,8 +35,13 @@ sky_material = SubResource("ProceduralSkyMaterial_ct78t")
 [sub_resource type="Environment" id="Environment_as4bf"]
 background_mode = 2
 sky = SubResource("Sky_55nej")
-tonemap_mode = 2
+tonemap_mode = 3
+ssr_enabled = true
+ssao_enabled = true
+sdfgi_enabled = true
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.016
 
 [node name="World" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)

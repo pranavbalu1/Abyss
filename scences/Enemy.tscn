@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnb2o7fpmja8i"]
+[gd_scene load_steps=5 format=3 uid="uid://bnb2o7fpmja8i"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_provp"]
-[ext_resource type="PackedScene" uid="uid://b88susdgymbjn" path="res://scences/cone.tscn" id="2_yvwvl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xyn1q"]
 albedo_color = Color(1, 0.337255, 0.32549, 1)
@@ -10,10 +9,6 @@ albedo_color = Color(1, 0.337255, 0.32549, 1)
 material = SubResource("StandardMaterial3D_xyn1q")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d6l6x"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_721fn"]
-height = 3.0
-radius = 5.0
 
 [node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
 transform = Transform3D(0.999938, -0.00696477, 0.00865334, 0.00700684, 0.999964, -0.00484253, -0.0086193, 0.00490285, 0.999951, 0, 0, 0)
@@ -42,25 +37,16 @@ debug_path_custom_point_size = 5.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_d6l6x")
 
-[node name="DetectionArea" type="Area3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.5, 0)
-
-[node name="Cone" parent="DetectionArea" instance=ExtResource("2_yvwvl")]
-transform = Transform3D(-8.74228e-09, -0.2, 8.74228e-09, 0.2, -8.74228e-09, -8.74228e-09, 8.74228e-09, 8.74228e-09, 0.2, 0.608, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
-shape = SubResource("CylinderShape3D_721fn")
-
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-visibility_parent = NodePath("../DetectionArea/Cone")
 target_position = Vector3(0, 0, 20)
 collide_with_areas = true
 debug_shape_custom_color = Color(1, 0.556863, 0, 1)
 debug_shape_thickness = 5
 metadata/_edit_group_ = true
 
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
-[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
-[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

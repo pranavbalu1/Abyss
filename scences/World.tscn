@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvdne8o5jdjrf"]
+[gd_scene load_steps=9 format=3 uid="uid://bvdne8o5jdjrf"]
 
 [ext_resource type="PackedScene" uid="uid://ctp4rf2qb3fp1" path="res://scences/navigation_region_3d.tscn" id="1_n3wod"]
 [ext_resource type="PackedScene" uid="uid://c2tywg4y6j76m" path="res://scences/Player.tscn" id="2_yy6u5"]
 [ext_resource type="PackedScene" uid="uid://bnb2o7fpmja8i" path="res://scences/Enemy.tscn" id="3_16o4k"]
 [ext_resource type="PackedScene" uid="uid://bu10gigsq520r" path="res://scences/god_view.tscn" id="4_s1fmo"]
-[ext_resource type="Script" path="res://scripts/Spectral_Being.gd" id="5_uams3"]
 
 [sub_resource type="GDScript" id="GDScript_gsamw"]
 script/source = "extends Node
@@ -58,6 +57,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1, 4)
 
 [node name="GodView" parent="." instance=ExtResource("4_s1fmo")]
 
-[node name="Spectral Being" parent="." instance=ExtResource("3_16o4k")]
-transform = Transform3D(0.0594283, 0, 0.998233, 0, 1, 0, -0.998233, 0, 0.0594283, -18.1535, 2.38419e-07, -15.1535)
-script = ExtResource("5_uams3")
+[node name="Enemy" parent="." instance=ExtResource("3_16o4k")]
+transform = Transform3D(0.999938, -0.00696477, 0.00865334, 0.00700684, 0.999964, -0.00484253, -0.0086193, 0.00490285, 0.999951, -16.5243, 0, 0)

@@ -3,30 +3,56 @@ extends CharacterBody3D
 @onready var nav_agent = $NavigationAgent3D
 @onready var nearby_radius = $DetectionArea
 @onready var rayCast = $RayCast3D
+@onready var timer = $Timer
 
 var player: CharacterBody3D
 
-var speed = 2
-var turn_speed = 10
-var player_close = false
-var random_position = Vector3(15, 0, 15)
-var turn_angle_smoothing = false
+
+var speed: float = 5.0
+var turn_speed: int = 10
+var player_close: bool = false
+var random_position: Vector3 = Vector3(15, 0, 15)
+var turn_angle_smoothing: bool = false
 
 # FOV settings
-var fov_angle = 70 # Total FOV angle (degrees)
-var fov_steps = 10 # Number of steps to divide FOV
-var fov_speed = 200.0 # Speed of FOV rotation
-var current_fov_angle = 0.0
+var fov_angle: int = 70 # Total FOV angle (degrees)
+var fov_steps: int = 10 # Number of steps to divide FOV
+var fov_speed: float = 200.0 # Speed of FOV rotation
+var current_fov_angle: float = 0.0
+
+
 
 var main_state_machine: LimboHSM
+
+var roam_poi : Array = [
+	Vector3(20.0, 1, 20.0),
+	Vector3(-10.0, 1, -10.0),
+	Vector3(15.0, 1, -20.0),
+	Vector3(-25.0, 1, 5.0),
+	Vector3(5.0, 1, -25.0),
+	Vector3(-20.0, 1, 20.0),
+	Vector3(10.0, 1, 15.0),
+	Vector3(-5.0, 1, -15.0),
+	Vector3(25.0, 1, 10.0),
+	Vector3(-15.0, 1, 25.0)
+]
 
 
 func _ready():
 	player = get_node("/root/World/Player")
+
 	initiate_state_machine()
-	
+
 func _physics_process(delta):
 	move_and_slide()
+	
+func rotate_raycast(delta):
+	current_fov_angle += fov_speed * delta
+	if current_fov_angle > fov_angle:
+		current_fov_angle = -fov_angle
+	var rotation_radians: float = deg_to_rad(current_fov_angle)
+	rayCast.rotation.y = rotation_radians
+	#print(current_fov_angle)
 
 
 func initiate_state_machine():
@@ -44,116 +70,90 @@ func initiate_state_machine():
 	main_state_machine.initialize(self)
 	main_state_machine.set_active(true)
 	
-	main_state_machine.initial_state = idle_state
+	main_state_machine.initial_state = roam_state
 	
-	main_state_machine.add_transition(idle_state, follow_state, &"to_follow")
-	main_state_machine.add_transition(main_state_machine.ANYSTATE, idle_state, &"state_ended")
-
+	main_state_machine.add_transition(main_state_machine.ANYSTATE, idle_state, &"to_idle")	
+	main_state_machine.add_transition(main_state_machine.ANYSTATE, follow_state, &"to_follow")
+	main_state_machine.add_transition(main_state_machine.ANYSTATE, roam_state, &"to_roam")
 	
-	
+		
 func idle_start():
 	print("idle start")
+	timer.start(5)
 	pass
 	
 func idle_update(delta: float):
-	print("idle update")
-	rotate_raycast(delta)
-	if (rayCast.is_colliding() && rayCast.get_collider().is_in_group("players")):
-		print("Ray Cast Colliding with player")
-		print("move to follow state")
-		main_state_machine.dispatch(&"to_follow")
+	
+	if timer.time_left == 0:
+		main_state_machine.dispatch("to_roam")
+		#main_state_machine
+		pass
 	pass
 
 func roam_start():
+	print("roam start")
+	timer.start(10)
 	pass
 	
 func roam_update(delta: float):
-	pass
+	move_nav_agent(delta, roam_poi[0])
+	if timer.time_left == 0:
+		stop_moving()
+		main_state_machine.dispatch("to_follow")
 
 func follow_start():
 	print("follow start")
 	pass
 	
 func follow_update(delta: float):
-	if !(rayCast.is_colliding() && rayCast.get_collider().is_in_group("players")):
-		main_state_machine.dispatch(&"state_ended")
-	print("follow update")
 	pass
 
-
-
-
-
-
-
-
-
-
-
-
-
-func rotate_raycast(delta):
-	current_fov_angle += fov_speed * delta
-	if current_fov_angle > fov_angle:
-		current_fov_angle = -fov_angle
-	var rotation_radians = deg_to_rad(current_fov_angle)
-	rayCast.rotation.y = rotation_radians
-	#print(current_fov_angle)
-
-func move_player_seen(delta):
-	#var space_state = get_world_3d().direct_space_state
-	var current_loc = global_transform.origin
-	var next_loc = nav_agent.get_next_path_position()
-	var new_velocity = (next_loc - current_loc).normalized() * speed
-	#var direction_to_next = (next_loc - current_loc).normalized()
 	
-	nav_agent.set_velocity(new_velocity)
+func move_nav_agent(delta, target: Vector3):
+	nav_agent.target_position = target
 	
-	velocity = velocity.move_toward(new_velocity, 0.25)
-	var desired_rotation_y = atan2(velocity.x, velocity.z)
-	if turn_angle_smoothing:
-		rotation.y = lerp_angle(rotation.y, desired_rotation_y, turn_speed * delta)
-	else:
-		rotation.y = desired_rotation_y
+	var destination: Vector3 = nav_agent.get_next_path_position()
+	var local_destination : Vector3= destination - global_position
+	var direction = local_destination.normalized()
 	
-	move_and_slide()
+	var target_velocity: Vector3 = direction * speed
+	velocity = velocity.move_toward(target_velocity, 0.2)
+	nav_agent.set_velocity(velocity)
 	
-func move_around_player_unseen(target):
-	var current_loc = global_transform.origin
-	var next_loc = target
-	var new_velocity = (next_loc - current_loc).normalized() * speed
-	
-	nav_agent.set_velocity(new_velocity)
-	if current_loc.distance_to(target) < 0.1:
+	turn_smoothing(delta)
+
+	var distance_left : float = (nav_agent.target_position - global_position).length()
+	print(distance_left)
+	if distance_left < 1.2:
 		stop_moving()
-		_on_navigation_agent_3d_target_reached()
-
+		roam_poi.shuffle()
+		print("roam_poi shuffled")
+		
 	move_and_slide()
 	
 func stop_moving():
 	velocity = Vector3.ZERO
 	nav_agent.set_velocity(Vector3.ZERO)
 
-func update_target_location(target_location):
-	nav_agent.target_position = target_location
+
+
+
+func roam_target_refresh():
+	var shift_roam_target: int = randi_range(-3, 3)
+	print(shift_roam_target)
+	pass
+	
+	
+func turn_smoothing(delta: float):
+	var desired_rotation_y = atan2(velocity.x, velocity.z)
+	if turn_angle_smoothing:
+		rotation.y = lerp_angle(rotation.y, desired_rotation_y, turn_speed * delta)
+	else:
+		rotation.y = desired_rotation_y
 
 func _on_navigation_agent_3d_target_reached() :
+	print("target reached")
 	pass
-	#print("target reached")
-
-func _on_navigation_agent_3d_velocity_computed(safe_velocity):
-	velocity = velocity.move_toward(safe_velocity, 0.25)
-	move_and_slide()
-
-func _on_detection_area_body_entered(body):
-	if body.is_in_group("players"):
-		#print("player entered nearby zone")
-		player_close = true
-		
-func _on_detection_area_body_exited(body):
-	if body.is_in_group("players"):
-		#print("player left neaby zone")
-		player_close = false
 
 func _unhandled_input(event: InputEvent):	
 	if event.is_action_pressed('position'):

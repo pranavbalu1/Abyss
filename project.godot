@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="abyss"
-run/main_scene="res://World.tscn"
+run/main_scene="res://scences/World.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 
 [input]

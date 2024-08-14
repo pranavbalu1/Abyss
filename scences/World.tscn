@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bvdne8o5jdjrf"]
+[gd_scene load_steps=10 format=3 uid="uid://bvdne8o5jdjrf"]
 
 [ext_resource type="PackedScene" uid="uid://ctp4rf2qb3fp1" path="res://scences/navigation_region_3d.tscn" id="1_n3wod"]
 [ext_resource type="PackedScene" uid="uid://c2tywg4y6j76m" path="res://scences/Player.tscn" id="2_yy6u5"]
 [ext_resource type="PackedScene" uid="uid://bnb2o7fpmja8i" path="res://scences/Enemy.tscn" id="3_16o4k"]
 [ext_resource type="PackedScene" uid="uid://bu10gigsq520r" path="res://scences/god_view.tscn" id="4_s1fmo"]
+[ext_resource type="PackedScene" uid="uid://wvwd70o4gdh3" path="res://Assets/Props/Chair_Wooden/ChairWooden.glb" id="5_s4jqb"]
 
 [sub_resource type="GDScript" id="GDScript_gsamw"]
 script/source = "extends Node
@@ -53,10 +54,13 @@ shadow_enabled = true
 environment = SubResource("Environment_as4bf")
 
 [node name="Player" parent="." instance=ExtResource("2_yy6u5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1, -21.8645)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2633, 1, 7.50159)
 
 [node name="GodView" parent="." instance=ExtResource("4_s1fmo")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 40, 0)
 
 [node name="Enemy" parent="." instance=ExtResource("3_16o4k")]
 transform = Transform3D(0.999938, -0.00696477, 0.00865334, 0.00700684, 0.999964, -0.00484253, -0.0086193, 0.00490285, 0.999951, 8.4757, 0, 0)
+
+[node name="ChairWooden" parent="." instance=ExtResource("5_s4jqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.64009, 0, 11.0938)

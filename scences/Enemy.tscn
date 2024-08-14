@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnb2o7fpmja8i"]
+[gd_scene load_steps=6 format=3 uid="uid://bnb2o7fpmja8i"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_provp"]
 
@@ -10,6 +10,17 @@ material = SubResource("StandardMaterial3D_xyn1q")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d6l6x"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ufnu6"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("NavigationAgent3D:pathfinding_algorithm")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
 [node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
 transform = Transform3D(0.999938, -0.00696477, 0.00865334, 0.00700684, 0.999964, -0.00484253, -0.0086193, 0.00490285, 0.999951, 0, 0, 0)
 script = ExtResource("1_provp")
@@ -20,6 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_qbfe5")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_height_offset = 1.0
 path_max_distance = 100.01
 avoidance_enabled = true
 height = 2.0
@@ -44,6 +56,9 @@ metadata/_edit_group_ = true
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ufnu6")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

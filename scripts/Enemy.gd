@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D
-@onready var nearby_radius = $DetectionArea
 @onready var rayCast = $RayCast3D
 @onready var timer = $Timer
 
@@ -43,7 +42,10 @@ func _ready():
 
 	initiate_state_machine()
 
-func _physics_process(delta):
+func _physics_process(_delta):
+	rotate_raycast(_delta)
+	if rayCast.is_colliding() && rayCast.get_collider().is_in_group("players"):
+		main_state_machine.dispatch("roam_to_follow")
 	move_and_slide()
 	
 func rotate_raycast(delta):
@@ -52,6 +54,7 @@ func rotate_raycast(delta):
 		current_fov_angle = -fov_angle
 	var rotation_radians: float = deg_to_rad(current_fov_angle)
 	rayCast.rotation.y = rotation_radians
+	
 	#print(current_fov_angle)
 
 
@@ -67,6 +70,7 @@ func initiate_state_machine():
 	main_state_machine.add_child(idle_state)
 	main_state_machine.add_child(roam_state)
 	main_state_machine.add_child(follow_state)
+	main_state_machine.add_child(event_state)
 	
 	main_state_machine.initialize(self)
 	main_state_machine.set_active(true)
@@ -77,15 +81,15 @@ func initiate_state_machine():
 	main_state_machine.add_transition(main_state_machine.ANYSTATE, follow_state, &"to_follow")
 	main_state_machine.add_transition(main_state_machine.ANYSTATE, roam_state, &"to_roam")
 	main_state_machine.add_transition(idle_state, event_state, &"idle_to_event")
-
+	main_state_machine.add_transition(roam_state, follow_state, &"roam_to_follow")
 
 # TODO: create proper state transistion conditions
 func idle_start():
 	print("idle start")
-	timer.start(5)
+	timer.start(15)
 	pass
 
-func idle_update(delta: float):
+func idle_update(_delta: float):
 
 	if timer.time_left == 0:
 		main_state_machine.dispatch("to_roam")
@@ -95,14 +99,10 @@ func idle_update(delta: float):
 
 func roam_start():
 	print("roam start")
-	timer.start(10)
 	pass
 
 func roam_update(delta: float):
 	move_nav_agent(delta, roam_poi[0])
-	if timer.time_left == 0:
-		stop_moving()
-		main_state_machine.dispatch("to_follow")
 
 func follow_start():
 	print("follow start")
@@ -117,7 +117,7 @@ func event_start():
 	# TODO : Trigger a event animation here!
 	pass
 
-func event_update(delta: float):
+func event_update(_delta: float):
 	print("event update")
 	pass
 

@@ -12,7 +12,7 @@ script/source = "extends Node
 @onready var FPSCam = $Player/neck/Camera3D
 @onready var GODview = $GodView
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	get_tree().call_group(\"enemies\", \"update_target_location\", Player.global_transform.origin)
 
 func _unhandled_input(event):
@@ -56,6 +56,7 @@ environment = SubResource("Environment_as4bf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1, -21.8645)
 
 [node name="GodView" parent="." instance=ExtResource("4_s1fmo")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 40, 0)
 
 [node name="Enemy" parent="." instance=ExtResource("3_16o4k")]
-transform = Transform3D(0.999938, -0.00696477, 0.00865334, 0.00700684, 0.999964, -0.00484253, -0.0086193, 0.00490285, 0.999951, -16.5243, 0, 0)
+transform = Transform3D(0.999938, -0.00696477, 0.00865334, 0.00700684, 0.999964, -0.00484253, -0.0086193, 0.00490285, 0.999951, 8.4757, 0, 0)

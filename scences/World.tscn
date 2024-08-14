@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://bvdne8o5jdjrf"]
+
+[ext_resource type="PackedScene" uid="uid://ctp4rf2qb3fp1" path="res://scences/navigation_region_3d.tscn" id="1_n3wod"]
+[ext_resource type="PackedScene" uid="uid://c2tywg4y6j76m" path="res://scences/Player.tscn" id="2_yy6u5"]
+[ext_resource type="PackedScene" uid="uid://bnb2o7fpmja8i" path="res://scences/Enemy.tscn" id="3_16o4k"]
+[ext_resource type="PackedScene" uid="uid://bu10gigsq520r" path="res://scences/god_view.tscn" id="4_s1fmo"]
+
+[sub_resource type="GDScript" id="GDScript_gsamw"]
+script/source = "extends Node
+
+@onready var Player = $Player
+@onready var FPSCam = $Player/neck/Camera3D
+@onready var GODview = $GodView
+
+func _physics_process(delta):
+	get_tree().call_group(\"enemies\", \"update_target_location\", Player.global_transform.origin)
+
+func _unhandled_input(event):
+	if event.is_action_pressed('camera'):
+		print(\" C Key pressed -> switching cameras\")
+		if get_viewport().get_camera_3d() == FPSCam:
+			GODview.current = true
+		else:
+			FPSCam.current = true
+			
+"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ct78t"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_55nej"]
+sky_material = SubResource("ProceduralSkyMaterial_ct78t")
+
+[sub_resource type="Environment" id="Environment_as4bf"]
+background_mode = 2
+sky = SubResource("Sky_55nej")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="World" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
+script = SubResource("GDScript_gsamw")
+metadata/_edit_group_ = true
+
+[node name="NavigationRegion3D" parent="." instance=ExtResource("1_n3wod")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.784776, 0.518609, -0.339368, 0, 0.547563, 0.836764, 0.619779, 0.656673, -0.429714, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_as4bf")
+
+[node name="Player" parent="." instance=ExtResource("2_yy6u5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1, -21.8645)
+
+[node name="GodView" parent="." instance=ExtResource("4_s1fmo")]
+
+[node name="Enemy" parent="." instance=ExtResource("3_16o4k")]
+transform = Transform3D(0.999938, -0.00696477, 0.00865334, 0.00700684, 0.999964, -0.00484253, -0.0086193, 0.00490285, 0.999951, -16.5243, 0, 0)

@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnb2o7fpmja8i"]
+
+[ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_provp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xyn1q"]
+albedo_color = Color(1, 0.337255, 0.32549, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qbfe5"]
+material = SubResource("StandardMaterial3D_xyn1q")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d6l6x"]
+
+[node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
+transform = Transform3D(0.999938, -0.00696477, 0.00865334, 0.00700684, 0.999964, -0.00484253, -0.0086193, 0.00490285, 0.999951, 0, 0, 0)
+script = ExtResource("1_provp")
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_qbfe5")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_max_distance = 100.01
+avoidance_enabled = true
+height = 2.0
+radius = 1.0
+keep_y_velocity = false
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+debug_path_custom_point_size = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_d6l6x")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+target_position = Vector3(0, 0, 20)
+collide_with_areas = true
+debug_shape_custom_color = Color(1, 0.556863, 0, 1)
+debug_shape_thickness = 5
+metadata/_edit_group_ = true
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

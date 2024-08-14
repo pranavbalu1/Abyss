@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvdne8o5jdjrf"]
+[gd_scene load_steps=7 format=3 uid="uid://bvdne8o5jdjrf"]
 
 [ext_resource type="PackedScene" uid="uid://ctp4rf2qb3fp1" path="res://scences/navigation_region_3d.tscn" id="1_n3wod"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_ygytn"]
+[ext_resource type="PackedScene" uid="uid://bnb2o7fpmja8i" path="res://scences/Enemy.tscn" id="3_7mo4n"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ct78t"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -29,6 +30,8 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_as4bf")
+
+[node name="Enemy" parent="." instance=ExtResource("3_7mo4n")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

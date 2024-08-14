@@ -62,6 +62,7 @@ func initiate_state_machine():
 	var idle_state = LimboState.new().named("idle").call_on_enter(idle_start).call_on_update(idle_update)
 	var roam_state = LimboState.new().named("roam").call_on_enter(roam_start).call_on_update(roam_update)
 	var follow_state = LimboState.new().named("follow").call_on_enter(follow_start).call_on_update(follow_update)
+	var event_state = LimboState.new().named("event").call_on_enter(event_start).call_on_update(event_update)
 	
 	main_state_machine.add_child(idle_state)
 	main_state_machine.add_child(roam_state)
@@ -75,15 +76,17 @@ func initiate_state_machine():
 	main_state_machine.add_transition(main_state_machine.ANYSTATE, idle_state, &"to_idle")	
 	main_state_machine.add_transition(main_state_machine.ANYSTATE, follow_state, &"to_follow")
 	main_state_machine.add_transition(main_state_machine.ANYSTATE, roam_state, &"to_roam")
-	
-		
+	main_state_machine.add_transition(idle_state, event_state, &"idle_to_event")
+
+
+# TODO: create proper state transistion conditions
 func idle_start():
 	print("idle start")
 	timer.start(5)
 	pass
-	
+
 func idle_update(delta: float):
-	
+
 	if timer.time_left == 0:
 		main_state_machine.dispatch("to_roam")
 		#main_state_machine
@@ -94,7 +97,7 @@ func roam_start():
 	print("roam start")
 	timer.start(10)
 	pass
-	
+
 func roam_update(delta: float):
 	move_nav_agent(delta, roam_poi[0])
 	if timer.time_left == 0:
@@ -104,11 +107,20 @@ func roam_update(delta: float):
 func follow_start():
 	print("follow start")
 	pass
-	
+
 func follow_update(delta: float):
+	move_nav_agent(delta, player.global_position)
 	pass
 
-	
+func event_start():
+	print("event start")
+	# TODO : Trigger a event animation here!
+	pass
+
+func event_update(delta: float):
+	print("event update")
+	pass
+
 func move_nav_agent(delta, target: Vector3):
 	nav_agent.target_position = target
 	
@@ -122,28 +134,20 @@ func move_nav_agent(delta, target: Vector3):
 	
 	turn_smoothing(delta)
 
-	var distance_left : float = (nav_agent.target_position - global_position).length()
-	print(distance_left)
-	if distance_left < 1.2:
+	#print(global_position.distance_to(target))
+	if global_position.distance_to(target) < 1.2:
 		stop_moving()
 		roam_poi.shuffle()
-		print("roam_poi shuffled")
-		
+		#print("Target Reached")
+		#player kill mechanic will be in player.gd!
 	move_and_slide()
 	
+
+
 func stop_moving():
 	velocity = Vector3.ZERO
 	nav_agent.set_velocity(Vector3.ZERO)
 
-
-
-
-func roam_target_refresh():
-	var shift_roam_target: int = randi_range(-3, 3)
-	print(shift_roam_target)
-	pass
-	
-	
 func turn_smoothing(delta: float):
 	var desired_rotation_y = atan2(velocity.x, velocity.z)
 	if turn_angle_smoothing:

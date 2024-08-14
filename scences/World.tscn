@@ -1,29 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bvdne8o5jdjrf"]
+[gd_scene load_steps=6 format=3 uid="uid://bvdne8o5jdjrf"]
 
 [ext_resource type="PackedScene" uid="uid://ctp4rf2qb3fp1" path="res://scences/navigation_region_3d.tscn" id="1_n3wod"]
-[ext_resource type="PackedScene" uid="uid://c2tywg4y6j76m" path="res://scences/Player.tscn" id="2_yy6u5"]
-[ext_resource type="PackedScene" uid="uid://bnb2o7fpmja8i" path="res://scences/Enemy.tscn" id="3_16o4k"]
-[ext_resource type="PackedScene" uid="uid://bu10gigsq520r" path="res://scences/god_view.tscn" id="4_s1fmo"]
-
-[sub_resource type="GDScript" id="GDScript_gsamw"]
-script/source = "extends Node
-
-@onready var Player = $Player
-@onready var FPSCam = $Player/neck/Camera3D
-@onready var GODview = $GodView
-
-func _physics_process(_delta):
-	get_tree().call_group(\"enemies\", \"update_target_location\", Player.global_transform.origin)
-
-func _unhandled_input(event):
-	if event.is_action_pressed('camera'):
-		print(\" C Key pressed -> switching cameras\")
-		if get_viewport().get_camera_3d() == FPSCam:
-			GODview.current = true
-		else:
-			FPSCam.current = true
-			
-"
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_ygytn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ct78t"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -40,7 +18,7 @@ glow_enabled = true
 
 [node name="World" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
-script = SubResource("GDScript_gsamw")
+script = ExtResource("1_ygytn")
 metadata/_edit_group_ = true
 
 [node name="NavigationRegion3D" parent="." instance=ExtResource("1_n3wod")]
@@ -52,11 +30,53 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_as4bf")
 
-[node name="Player" parent="." instance=ExtResource("2_yy6u5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1, -21.8645)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="GodView" parent="." instance=ExtResource("4_s1fmo")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 40, 0)
+[node name="Main Menu" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 420.0
+offset_top = 220.0
+offset_right = -420.0
+offset_bottom = -220.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Enemy" parent="." instance=ExtResource("3_16o4k")]
-transform = Transform3D(0.999938, -0.00696477, 0.00865334, 0.00700684, 0.999964, -0.00484253, -0.0086193, 0.00490285, 0.999951, 8.4757, 0, 0)
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Main Menu"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Main Menu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="CanvasLayer/Main Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Host" type="Button" parent="CanvasLayer/Main Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="Join" type="Button" parent="CanvasLayer/Main Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[node name="AddressEntry" type="LineEdit" parent="CanvasLayer/Main Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter Address to join"
+alignment = 1
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scences/Player.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="CanvasLayer/Main Menu/MarginContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main Menu/MarginContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]

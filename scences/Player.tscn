@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2tywg4y6j76m"]
+[gd_scene load_steps=7 format=3 uid="uid://c2tywg4y6j76m"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nkaod"]
 [ext_resource type="PackedScene" uid="uid://b1i2qvs240s5m" path="res://models/Flashlight_GEO.glb" id="2_smmxd"]
@@ -11,8 +11,23 @@ points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607,
 [sub_resource type="SphereShape3D" id="SphereShape3D_mn330"]
 radius = 2.0
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_24n35"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("neck/Camera3D:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("neck:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
 [node name="Player" type="CharacterBody3D" groups=["players"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 2
 script = ExtResource("1_nkaod")
 metadata/_edit_group_ = true
 
@@ -35,5 +50,8 @@ collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Death Radius"]
 shape = SubResource("SphereShape3D_mn330")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_24n35")
 
 [connection signal="body_entered" from="Death Radius" to="." method="_on_death_radius_body_entered"]

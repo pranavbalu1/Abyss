@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bvdne8o5jdjrf"]
+[gd_scene load_steps=10 format=3 uid="uid://bvdne8o5jdjrf"]
 
 [ext_resource type="PackedScene" uid="uid://ctp4rf2qb3fp1" path="res://scences/navigation_region_3d.tscn" id="1_n3wod"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_ygytn"]
 [ext_resource type="PackedScene" uid="uid://bnb2o7fpmja8i" path="res://scences/Enemy.tscn" id="3_7mo4n"]
 [ext_resource type="Script" path="res://scripts/MultiplayerSpawner.gd" id="4_53484"]
 [ext_resource type="PackedScene" uid="uid://c2tywg4y6j76m" path="res://scences/Player.tscn" id="5_k776s"]
+[ext_resource type="PackedScene" uid="uid://bu10gigsq520r" path="res://scences/god_view.tscn" id="6_a2l4g"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ct78t"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -40,3 +41,5 @@ _spawnable_scenes = PackedStringArray("res://scences/Player.tscn")
 spawn_path = NodePath("..")
 script = ExtResource("4_53484")
 playerScene = ExtResource("5_k776s")
+
+[node name="GodView" parent="." instance=ExtResource("6_a2l4g")]

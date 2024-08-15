@@ -10,10 +10,6 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var neck := $neck 
 @onready var camera := $neck/Camera3D
 
-
-func _enter_tree():
-	set_multiplayer_authority(str(name).to_int())
-
 func _ready():
 	camera.current = is_multiplayer_authority() # if not the owner on this client it doesnt enable camera
 
@@ -41,7 +37,8 @@ func _physics_process(delta):
 				velocity.z = move_toward(velocity.z, 0, SPEED)
 		else:
 			print("Dead") # TODO : Trigger Death animation here and prefereably implement spectate mode
-			pass
+	else:
+		return
 			
 		move_and_slide()
 

@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvdne8o5jdjrf"]
+[gd_scene load_steps=9 format=3 uid="uid://bvdne8o5jdjrf"]
 
 [ext_resource type="PackedScene" uid="uid://ctp4rf2qb3fp1" path="res://scences/navigation_region_3d.tscn" id="1_n3wod"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_ygytn"]
 [ext_resource type="PackedScene" uid="uid://bnb2o7fpmja8i" path="res://scences/Enemy.tscn" id="3_7mo4n"]
+[ext_resource type="Script" path="res://scripts/MultiplayerSpawner.gd" id="4_53484"]
+[ext_resource type="PackedScene" uid="uid://c2tywg4y6j76m" path="res://scences/Player.tscn" id="5_k776s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ct78t"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -33,53 +35,8 @@ environment = SubResource("Environment_as4bf")
 
 [node name="Enemy" parent="." instance=ExtResource("3_7mo4n")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Main Menu" type="PanelContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 420.0
-offset_top = 220.0
-offset_right = -420.0
-offset_bottom = -220.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Main Menu"]
-layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Main Menu/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Label" type="Label" parent="CanvasLayer/Main Menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Main Menu"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Host" type="Button" parent="CanvasLayer/Main Menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Host"
-
-[node name="Join" type="Button" parent="CanvasLayer/Main Menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Join"
-
-[node name="AddressEntry" type="LineEdit" parent="CanvasLayer/Main Menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-placeholder_text = "Enter Address to join"
-alignment = 1
-
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scences/Player.tscn")
 spawn_path = NodePath("..")
-
-[connection signal="pressed" from="CanvasLayer/Main Menu/MarginContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="CanvasLayer/Main Menu/MarginContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]
+script = ExtResource("4_53484")
+playerScene = ExtResource("5_k776s")

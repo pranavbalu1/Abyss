@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://cr8i5pvklehqa"]
+
+[ext_resource type="Script" path="res://scripts/Client.gd" id="1_kl6oa"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kl6oa")
+
+[node name="UerAccount" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "User Account
+"
+
+[node name="UserAccountText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 111.0
+offset_right = 211.0
+offset_bottom = 23.0
+text = "user account"
+
+[node name="DisplayName" type="Label" parent="."]
+layout_mode = 0
+offset_top = 23.0
+offset_right = 100.0
+offset_bottom = 46.0
+text = "Display Name
+"
+
+[node name="DisplayNameText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 23.0
+offset_right = 211.0
+offset_bottom = 46.0
+text = "user account"

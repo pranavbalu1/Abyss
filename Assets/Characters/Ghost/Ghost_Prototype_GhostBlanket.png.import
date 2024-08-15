@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c8323y56d3nb3"
-path.s3tc="res://.godot/imported/Ghost_Prototype_GhostBlanket.png-febdfd3b4986a07457e62d12d9697ddc.s3tc.ctex"
+path.s3tc="res://.godot/imported/Ghost_Prototype_GhostBlanket.png-629343c0fab7dc0ad73df5d3b4f734c2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://Ghost_Prototype_GhostBlanket.png"
-dest_files=["res://.godot/imported/Ghost_Prototype_GhostBlanket.png-febdfd3b4986a07457e62d12d9697ddc.s3tc.ctex"]
+source_file="res://Assets/Characters/Ghost/Ghost_Prototype_GhostBlanket.png"
+dest_files=["res://.godot/imported/Ghost_Prototype_GhostBlanket.png-629343c0fab7dc0ad73df5d3b4f734c2.s3tc.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://c2tywg4y6j76m"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_nkaod"]
-[ext_resource type="PackedScene" uid="uid://b1i2qvs240s5m" path="res://models/Flashlight_GEO.glb" id="2_smmxd"]
+[ext_resource type="PackedScene" uid="uid://det26mxb7xxml" path="res://Assets/Items/Flashlight_GEO.tscn" id="2_mhsyx"]
 [ext_resource type="Shader" path="res://Shaders/PostProcessingShader.gdshader" id="3_air18"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vdyc7"]
@@ -37,8 +37,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.562869, 0)
 
 [node name="Camera3D" type="Camera3D" parent="neck"]
 
-[node name="Flashlight_GEO2" parent="neck/Camera3D" instance=ExtResource("2_smmxd")]
-transform = Transform3D(-3.0598e-09, 0, -0.15, 0, 0.15, 0, 0.07, 0, -6.55671e-09, 0.353176, -0.278134, -0.498561)
+[node name="Flashlight" parent="neck/Camera3D" instance=ExtResource("2_mhsyx")]
+transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.37114e-09, 0.260027, -0.223444, -0.564242)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="neck/Camera3D"]
 extra_cull_margin = 16384.0

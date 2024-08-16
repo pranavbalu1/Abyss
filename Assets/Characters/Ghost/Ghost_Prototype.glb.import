@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://1qc25hltwvga"
-path="res://.godot/imported/Ghost_Prototype.glb-7485e76e6db245fb6d58a5a0c34695f2.scn"
+path="res://.godot/imported/Ghost_Prototype.glb-c9459c7b02b5c8e742354ce6594eb9cd.scn"
 
 [deps]
 
-source_file="res://Ghost_Prototype.glb"
-dest_files=["res://.godot/imported/Ghost_Prototype.glb-7485e76e6db245fb6d58a5a0c34695f2.scn"]
+source_file="res://Assets/Characters/Ghost/Ghost_Prototype.glb"
+dest_files=["res://.godot/imported/Ghost_Prototype.glb-c9459c7b02b5c8e742354ce6594eb9cd.scn"]
 
 [params]
 

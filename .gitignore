@@ -1,0 +1,38 @@
+# Ignore all binaries and build files
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vscode/
+
+# Ignore user-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore generated source files
+*.VC.db
+*.VC.VC.opendb
+*.opensdf
+*.sdf
+
+# Ignore config files that are not part of the project
+*.ini
+*.log
+*.pdb
+*.local
+*.opendb
+
+# Ignore files that can contain sensitive data
+*.ds_store
+*.swp
+*.log
+*.temp
+/.vs
+.vsconfig
+/Builds
+/Content/StarterContent
+/Content/LevelPrototyping
+/Content/FPWeapon

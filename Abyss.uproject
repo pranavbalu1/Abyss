@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{5FEB4A60-4D4C-4FA1-202B-A0BFA485EDDB}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "Abyss",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ModelingToolsEditorMode",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		}
+	]
+}

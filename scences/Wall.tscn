@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bu42asym5ytdj"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2gnxm"]
-
-[node name="Wall" type="CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 2, 0)
-use_collision = true
-size = Vector3(4, 4, 0.5)
-material = SubResource("StandardMaterial3D_2gnxm")
